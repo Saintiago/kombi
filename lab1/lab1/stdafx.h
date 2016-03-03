@@ -12,6 +12,8 @@
 #include <ctime>
 #include <vector>
 #include <algorithm>
+#include <iostream>
+#include <iterator>
 
 
 
