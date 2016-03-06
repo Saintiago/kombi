@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{F68ED626-208B-4F2E-83F8-DE27A8C1A713}</ProjectGuid>
+    <ProjectGuid>{E64C8A27-6709-43CB-9111-005F73553D85}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>ex2</RootNamespace>
+    <RootNamespace>ex3</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -145,15 +145,15 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Combination.h" />
-    <ClInclude Include="Sequence.h" />
+    <ClInclude Include="..\ex2\Combination.h" />
+    <ClInclude Include="..\lab1\Permutation.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Combination.cpp" />
-    <ClCompile Include="ex2.cpp" />
-    <ClCompile Include="Sequence.cpp" />
+    <ClCompile Include="..\ex2\Combination.cpp" />
+    <ClCompile Include="..\lab1\Permutation.cpp" />
+    <ClCompile Include="ex3.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
