@@ -3,8 +3,9 @@
 
 using namespace std;
 
-CPermutation::CPermutation(int length)
-	: m_length(length)
+CPermutation::CPermutation(vector<int> combination)
+	: m_combination(combination)
+	, m_length(m_combination.size())
 {
 	for (int i = 1; i <= m_length; ++i)
 	{
@@ -50,6 +51,9 @@ long CPermutation::SpawnPermutations(bool showPermutations)
 
 void CPermutation::showPermutation(ostream & out)
 {
-	copy(m_current.begin() + 1, m_current.end() - 1, ostream_iterator<int>(out, ", "));
+	for (size_t i = 1; i < (m_current.size() - 1); ++i)
+	{
+		out << m_combination.at(m_current.at(i) - 1) << ", ";
+	}
 	out << endl;
 }

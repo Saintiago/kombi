@@ -7,6 +7,7 @@ CCombination::CCombination(int n, int k)
 	: m_n(n)
 	, m_k(k)
 {
+	m_set.insert(m_set.begin(), -1);
 	for (int i = 1; i <= m_k; ++i)
 	{
 		m_set.push_back(i);
@@ -18,9 +19,12 @@ CCombination::~CCombination()
 {
 }
 
-std::vector<int> CCombination::GetCombination()
+vector<int> CCombination::GetCombination()
 {
-	return m_set;
+	vector<int> cleanCombination;
+	cleanCombination.resize(m_set.size() - 1);
+	copy(m_set.begin() + 1, m_set.end(), cleanCombination.begin());
+	return cleanCombination;
 }
 
 bool CCombination::SpawnNextCombination()
@@ -44,7 +48,6 @@ bool CCombination::SpawnNextCombination()
 
 long CCombination::SpawnCombinations(bool showCombinations)
 {
-	m_set.insert(m_set.begin(), -1);
 	int counter = 0;
 
 	do

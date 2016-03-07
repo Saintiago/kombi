@@ -7,10 +7,9 @@ class CSequence
 public:
 	CSequence(int n, int k);
 	~CSequence();
+	long SpawnSequences(bool showSequences);
 
 private:
 	int m_n, m_k;
-	CPermutation m_permutation;
-	CCombination m_combination;
 };
 

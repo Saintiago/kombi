@@ -10,12 +10,12 @@ int main()
 {
 	cout << "Spawning 10 combinations of length 5..." << endl;
 	clock_t startTime = clock();
-	long combinationsCount = CCombination(5, 3).SpawnCombinations(true);
+	long combinationsCount = CCombination(10, 5).SpawnCombinations(false);
 	double duration = (std::clock() - startTime) / (double)CLOCKS_PER_SEC;
 	cout << "Combinations count: " << combinationsCount << endl;
 	cout << "Time spent: " << duration << " seconds" << endl << endl;
 	
-	/*cout << "Spawning 20 combinations of length 5..." << endl;
+	cout << "Spawning 20 combinations of length 5..." << endl;
 	startTime = clock();
 	combinationsCount = CCombination(20, 5).SpawnCombinations(false);
 	duration = (std::clock() - startTime) / (double)CLOCKS_PER_SEC;
@@ -41,7 +41,7 @@ int main()
 	combinationsCount = CCombination(100, 5).SpawnCombinations(false);
 	duration = (std::clock() - startTime) / (double)CLOCKS_PER_SEC;
 	cout << "Combinations count: " << combinationsCount << endl;
-	cout << "Time spent: " << duration << " seconds" << endl;*/
+	cout << "Time spent: " << duration << " seconds" << endl;
 	
 	return 0;
 }
