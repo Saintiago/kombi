@@ -18,33 +18,45 @@ CCombination::~CCombination()
 {
 }
 
+std::vector<int> CCombination::GetCombination()
+{
+	return m_set;
+}
+
+bool CCombination::SpawnNextCombination()
+{
+	int j = m_k;
+
+	while (m_set[j] == (m_n - m_k + j))
+	{
+		--j;
+	}
+
+	++m_set[j];
+
+	for (int i = j + 1; i <= m_k; i++)
+	{
+		m_set[i] = m_set[i - 1] + 1;
+	}
+
+	return (j != 0);
+}
+
 long CCombination::SpawnCombinations(bool showCombinations)
 {
 	m_set.insert(m_set.begin(), -1);
 	int counter = 0;
-	int j = 1;
 
-	while (j != 0)
+	do
 	{
 		if (showCombinations)
 		{
 			showCombination(cout);
 		}
 		++counter;
-		j = m_k;
+	} 
+	while (SpawnNextCombination());
 
-		while (m_set[j] == (m_n - m_k + j))
-		{
-			--j;
-		}
-
-		++m_set[j];
-
-		for (int i = j + 1; i <= m_k; i++)
-		{
-			m_set[i] = m_set[i - 1] + 1;
-		}
-	}
 	return counter;
 }
 

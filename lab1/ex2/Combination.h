@@ -6,6 +6,8 @@ public:
 	~CCombination();
 
 	long SpawnCombinations(bool showCombinations);
+	std::vector<int> GetCombination();
+	bool SpawnNextCombination();
 
 private:
 	std::vector<int> m_set;
@@ -13,4 +15,3 @@ private:
 
 	void showCombination(std::ostream & out);
 };
-

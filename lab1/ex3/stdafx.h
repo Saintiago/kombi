@@ -9,6 +9,11 @@
 
 #include <stdio.h>
 #include <tchar.h>
+#include <ctime>
+#include <vector>
+#include <algorithm>
+#include <iostream>
+#include <iterator>
 
 
 
