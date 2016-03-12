@@ -57,3 +57,10 @@ void CPermutation::showPermutation(ostream & out)
 	}
 	out << endl;
 }
+
+vector<int> CPermutation::GetRandomPermutation()
+{
+	vector<int> randomPermutation(m_current);
+	random_shuffle(randomPermutation.begin(), randomPermutation.end());
+	return randomPermutation;
+}

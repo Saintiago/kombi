@@ -6,6 +6,7 @@ public:
 	~CPermutation();
 
 	long SpawnPermutations(bool showPermutations);
+	std::vector<int> GetRandomPermutation();
 
 private:
 	std::vector<int> m_combination;
