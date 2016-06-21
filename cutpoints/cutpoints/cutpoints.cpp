@@ -7,17 +7,21 @@
 
 using namespace std;
 
-void IS_CUTPOINT(int v);
-
 vector<int> g[MAXN];
 bool used[MAXN], cutpoint[MAXN];
-int n, timer, tin[MAXN], fup[MAXN];
+int n, cutPointCount, timer, tin[MAXN], fup[MAXN];
 
-void dfs(int v, int p = -1) 
+void IsCutpoint(int v)
+{
+	cutPointCount++;
+	cutpoint[v] = true;
+}
+
+void findCutpoints(int v, int p = -1) 
 {
 	used[v] = true;
 	tin[v] = fup[v] = timer++;
-	int children = 0;
+	int sonCount = 0;
 	for (size_t i = 0; i<g[v].size(); ++i) 
 	{
 		int to = g[v][i];
@@ -28,19 +32,19 @@ void dfs(int v, int p = -1)
 		}
 		else 
 		{
-			dfs(to, v);
+			findCutpoints(to, v);
 			fup[v] = min(fup[v], fup[to]);
 			if (fup[to] >= tin[v] && p != -1)
 			{
-				IS_CUTPOINT(v);
+				IsCutpoint(v);
 			}
-			++children;
+			++sonCount;
 		}
 	}
 
-	if (p == -1 && children > 1)
+	if (p == -1 && sonCount > 1)
 	{
-		IS_CUTPOINT(v);
+		IsCutpoint(v);
 	}
 }
 
@@ -61,11 +65,13 @@ void readGraph(ifstream & is)
 	}
 }
 
-void writeGraph()
+void writeResult()
 {
 	ofstream out;
 	out.open("output.txt");
 	
+	cout << cutPointCount << endl;
+
 	for (int i = 0; i < n; i++)
 	{
 		if (cutpoint[i])
@@ -93,7 +99,7 @@ int main(int argc, char* argv[])
 			throw exception("Cannot open file.");
 		}
 
-		n = 0;
+		n = cutPointCount = 0;
 
 		readGraph(fin);
 
@@ -102,9 +108,9 @@ int main(int argc, char* argv[])
 		{
 			used[i] = cutpoint[i] = false;
 		}
-		dfs(0);
+		findCutpoints(0);
 
-		writeGraph();
+		writeResult();
 	}
 	catch (exception & e)
 	{
@@ -113,9 +119,4 @@ int main(int argc, char* argv[])
 	}
 
     return 0;
-}
-
-void IS_CUTPOINT(int v)
-{
-	cutpoint[v] = true;
 }
