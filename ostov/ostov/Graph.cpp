@@ -69,7 +69,7 @@ void CGraph::AddNode(unsigned index)
 	if (index >= curSize)
 		for (unsigned i = 0; i <= (index - curSize); i++)
 		{
-			m_nodes.push_back(make_shared<CNode>());
+			m_nodes.push_back(make_shared<CNode>(index));
 		}
 }
 

@@ -21,3 +21,17 @@ NodePtrVector CComponent::GetNodes()
 {
 	return m_nodes;
 }
+
+bool CComponent::hasNode(unsigned nodeIndex)
+{
+	bool found = false;
+	for (auto const & componentNode : m_nodes)
+	{
+		if (nodeIndex == componentNode->GetIndex())
+		{
+			found = true;
+			break;
+		}
+	}
+	return found;
+}

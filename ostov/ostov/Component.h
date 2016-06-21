@@ -13,8 +13,8 @@ public:
 	~CComponent();
 
 	void AddNode(NodePtr node);
-	void AddClosestNode();
 	NodePtrVector GetNodes();
+	bool hasNode(unsigned nodeIndex);
 
 private:
 	NodePtrVector m_nodes = {};
