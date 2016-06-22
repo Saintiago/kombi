@@ -89,6 +89,7 @@ NodePathNode CBoruvka::GetClosestLink(NodePathNodeVector links)
 
 void CBoruvka::resetComponents()
 {
+	m_components = {};
 	NodePtrVector allNodes = m_graph.GetNodes();
 	while (allNodes.size() > 0)
 	{
@@ -98,7 +99,25 @@ void CBoruvka::resetComponents()
 
 void CBoruvka::AddLink(NodePathNode link)
 {
-	m_links.push_back(link);
+	if (!hasLink(link))
+	{
+		m_links.push_back(link);
+	}
+}
+
+bool CBoruvka::hasLink(NodePathNode link)
+{
+	unsigned n1 = link.first;
+	unsigned n2 = link.second.first;
+	for (auto const &link : m_links)
+	{
+		if ((link.first == n1 && link.second.first == n2)
+			|| (link.first == n2 && link.second.first == n1))
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 ComponentPtr CBoruvka::GetNewComponent(NodePtrVector & allNodes)
@@ -113,9 +132,26 @@ void CBoruvka::ExpandComponent(NodePtr node, ComponentPtr & comp, NodePtrVector 
 	comp->AddNode(node);
 	for (auto &adjacentNode : GetAdjacentNodes(node))
 	{
-		ExpandComponent(adjacentNode, comp, allNodes);
+		if (!comp->hasNode(adjacentNode->GetIndex()))
+		{
+			ExpandComponent(adjacentNode, comp, allNodes);
+		}
 	}
-	allNodes.erase(allNodes.begin() + node->GetIndex());
+
+	eraseNode(allNodes, node);
+}
+
+void CBoruvka::eraseNode(NodePtrVector & nodes, NodePtr node)
+{
+	unsigned nodeIndex = node->GetIndex();
+	for (size_t i = 0; i != nodes.size(); i++)
+	{
+		if (nodes.at(i)->GetIndex() == nodeIndex)
+		{
+			nodes.erase(nodes.begin() + i);
+			break;
+		}
+	}
 }
 
 NodePtrVector CBoruvka::GetAdjacentNodes(NodePtr node)

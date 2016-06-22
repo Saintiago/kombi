@@ -25,6 +25,8 @@ private:
 	NodePathNode GetClosestLink(NodePathNodeVector links);
 	void resetComponents();
 	void AddLink(NodePathNode link);
+	bool hasLink(NodePathNode link);
+	void eraseNode(NodePtrVector & nodes, NodePtr node);
 
 	ComponentPtr GetNewComponent(NodePtrVector & allNodes);
 	void ExpandComponent(NodePtr node, ComponentPtr & comp, NodePtrVector & allNodes);
