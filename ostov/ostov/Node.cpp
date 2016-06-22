@@ -37,7 +37,7 @@ NodePathPairVector & CNode::GetLinks()
 	return m_links;
 }
 
-NodePathNodeVector & CNode::GetNodeLinks()
+NodePathNodeVector CNode::GetNodeLinks()
 {
 	NodePathNodeVector nodeLinks = {};
 	for (auto const &link : m_links)

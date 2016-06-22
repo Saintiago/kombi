@@ -22,7 +22,7 @@ CGraph CBoruvka::GetGraph()
 	return m_graph;
 }
 
-ComponentPtr CBoruvka::GetOstov()
+NodePathNodeVector CBoruvka::GetOstov()
 {
 	InitComponents(m_graph.GetNodes());
 
@@ -35,14 +35,16 @@ ComponentPtr CBoruvka::GetOstov()
 		resetComponents();
 	}
 
-	return m_components.at(0);
+	return m_links;
 }
 
 void CBoruvka::InitComponents(NodePtrVector nodes)
 {
 	for (auto const &node : nodes)
 	{
-		m_components.push_back(make_shared<CComponent>(node));
+		ComponentPtr comp = make_shared<CComponent>();
+		comp->AddNode(node);
+		m_components.push_back(comp);
 	}
 }
 
@@ -101,11 +103,9 @@ void CBoruvka::AddLink(NodePathNode link)
 
 ComponentPtr CBoruvka::GetNewComponent(NodePtrVector & allNodes)
 {
-	ComponentPtr comp = make_shared<CComponent>(allNodes.at(0));
-
+	ComponentPtr comp = make_shared<CComponent>();
 	ExpandComponent(allNodes.at(0), comp, allNodes);
-
-	allNodes.erase(allNodes.begin());
+	return comp;
 }
 
 void CBoruvka::ExpandComponent(NodePtr node, ComponentPtr & comp, NodePtrVector & allNodes)

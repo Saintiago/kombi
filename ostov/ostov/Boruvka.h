@@ -12,7 +12,7 @@ public:
 	void MakeGraph(std::ifstream & fin);
 	CGraph GetGraph();
 
-	ComponentPtr GetOstov();
+	NodePathNodeVector GetOstov();
 	
 
 private:

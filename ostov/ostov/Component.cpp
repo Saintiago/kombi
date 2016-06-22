@@ -2,9 +2,8 @@
 #include "Component.h"
 
 
-CComponent::CComponent(NodePtr node)
+CComponent::CComponent()
 {
-	AddNode(node);
 }
 
 
@@ -34,4 +33,9 @@ bool CComponent::hasNode(unsigned nodeIndex)
 		}
 	}
 	return found;
+}
+
+NodePtr CComponent::GetFirstNode()
+{
+	return m_nodes.at(0);
 }

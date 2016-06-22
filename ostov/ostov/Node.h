@@ -19,7 +19,7 @@ public:
 
 	void AddLink(unsigned node, unsigned weight);
 	NodePathPairVector & GetLinks();
-	NodePathNodeVector & GetNodeLinks();
+	NodePathNodeVector GetNodeLinks();
 	unsigned GetIndex();
 
 	bool GetVisited();

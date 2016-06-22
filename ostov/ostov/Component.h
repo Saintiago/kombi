@@ -9,12 +9,13 @@ typedef std::vector<ComponentPtr> ComponentPtrVector;
 class CComponent
 {
 public:
-	CComponent(NodePtr node);
+	CComponent();
 	~CComponent();
 
 	void AddNode(NodePtr node);
 	NodePtrVector GetNodes();
 	bool hasNode(unsigned nodeIndex);
+	NodePtr GetFirstNode();
 
 private:
 	NodePtrVector m_nodes = {};
