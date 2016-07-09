@@ -5,7 +5,6 @@
 
 using namespace std;
 
-const int MAX_VERTICES = 40;
 const int MY_INFINITY = 10000;
  
 vector<vector<int>> currentFlow, arcCapacity;
