@@ -3,7 +3,8 @@
 
 #include "stdafx.h"
 
-#define MAXN 100
+#define MAXN 1000
+#define RAND_GRAPH_SIZE 500;
 
 using namespace std;
 
@@ -50,10 +51,29 @@ void readGraph(ifstream & is)
 	}
 }
 
-void writeResult()
+void generateRandomDenseGraph()
+{
+	srand(time(0));
+	for (int j = 0; j < n; j++)
+	{
+		g.push_back({});
+		for (int i = 0; i < n; i++)
+		{
+			int node = rand() % 2;
+			if (node == 1)
+			{
+				g[j].push_back(i);
+			}
+		}
+	}
+}
+
+void writeResult(double duration)
 {
 	ofstream out;
 	out.open("output.txt");
+
+	out << "Time spent: " << duration << " sec." << endl;
 
 	if (pairCount == n)
 	{
@@ -81,18 +101,27 @@ int main(int argc, char* argv[])
 
 		if (argc != 2)
 		{
-			throw exception("Usage: kun.exe <input-file>");
+			n = k = RAND_GRAPH_SIZE;
+			cout << "Using random " << n << " graph." << endl;
+			generateRandomDenseGraph();
 		}
-
-		ifstream fin(argv[1]);
-		if (!fin.is_open())
+		else
 		{
-			throw exception("Cannot open file.");
+			ifstream fin(argv[1]);
+			if (!fin.is_open())
+			{
+				throw exception("Cannot open file.");
+			}
+
+			n = k = 0;
+			readGraph(fin);
 		}
 
-		n = k = pairCount = 0;
-		readGraph(fin);
-
+		clock_t start;
+		double duration;
+		start = std::clock();
+		
+		pairCount = 0;
 		mt.assign(k, -1);
 		for (int v = 0; v < n; ++v) 
 		{
@@ -100,7 +129,9 @@ int main(int argc, char* argv[])
 			DoKuhn(v);
 		}
 
-		writeResult();
+		duration = (std::clock() - start) / (double)CLOCKS_PER_SEC;
+
+		writeResult(duration);
 	}
 	catch (exception & e)
 	{
